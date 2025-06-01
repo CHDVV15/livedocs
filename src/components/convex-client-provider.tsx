@@ -7,7 +7,17 @@ import type { PropsWithChildren } from 'react';
 
 import { FullscreenLoader } from './fullscreen-loader';
 
-const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL);
+if (!process.env.NEXT_PUBLIC_CONVEX_URL) {
+  throw new Error('Missing NEXT_PUBLIC_CONVEX_URL environment variable');
+}
+
+if (!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY) {
+  throw new Error('Missing NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY environment variable');
+}
+
+const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL, {
+  unsavedChangesWarning: false,
+});
 
 export function ConvexClientProvider({ children }: PropsWithChildren) {
   return (
@@ -29,7 +39,9 @@ export function ConvexClientProvider({ children }: PropsWithChildren) {
       }}
     >
       <ConvexProviderWithClerk useAuth={useAuth} client={convex}>
-        <Authenticated>{children}</Authenticated>
+        <Authenticated>
+          {children}
+        </Authenticated>
 
         <Unauthenticated>
           <div className="flex min-h-screen items-center justify-center">

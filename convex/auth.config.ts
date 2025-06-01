@@ -1,8 +1,8 @@
 export default {
   providers: [
     {
-      domain: process.env.CLERK_ISSUER_URL,
-      applicationID: 'convex',
+      domain: "quick-amoeba-12.clerk.accounts.dev",
+      applicationID: "convex",
     },
   ],
 };

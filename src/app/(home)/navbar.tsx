@@ -1,4 +1,4 @@
-import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
+import { OrganizationSwitcher, UserButton, useOrganization } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaGithub } from 'react-icons/fa';
@@ -8,6 +8,8 @@ import { links } from '@/config';
 import { SearchInput } from './search-input';
 
 export const Navbar = () => {
+  const { organization } = useOrganization();
+
   return (
     <nav className="flex size-full items-center justify-between">
       <Link href="/" className="mr-6 transition-opacity hover:opacity-75">
@@ -21,12 +23,14 @@ export const Navbar = () => {
       <SearchInput />
 
       <div className="flex items-center gap-3 pl-6">
-        <OrganizationSwitcher
-          afterCreateOrganizationUrl="/"
-          afterLeaveOrganizationUrl="/"
-          afterSelectOrganizationUrl="/"
-          afterSelectPersonalUrl="/"
-        />
+        {organization && (
+          <OrganizationSwitcher
+            afterCreateOrganizationUrl="/"
+            afterLeaveOrganizationUrl="/"
+            afterSelectOrganizationUrl="/"
+            afterSelectPersonalUrl="/"
+          />
+        )}
 
         <UserButton />
 

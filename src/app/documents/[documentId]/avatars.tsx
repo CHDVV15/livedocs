@@ -57,7 +57,13 @@ const Avatar = ({ src, name }: AvatarProps) => {
       </div>
 
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img alt={name} src={src} className="size-full rounded-full" />
+      {src ? (
+        <img alt={name} src={src} className="size-full rounded-full" />
+      ) : (
+        <div className="size-full rounded-full bg-gray-300 flex items-center justify-center">
+          {name?.[0] || '?'}
+        </div>
+      )}
     </div>
   );
 };
