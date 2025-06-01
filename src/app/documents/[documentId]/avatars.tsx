@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { ClientSideSuspense, useOthers, useSelf } from '@liveblocks/react/suspense';
 
 import { Separator } from '@/components/ui/separator';
@@ -42,7 +43,7 @@ const AvatarStack = () => {
 };
 
 interface AvatarProps {
-  src: string;
+  src: string | null;
   name: string;
 }
 
@@ -56,11 +57,10 @@ const Avatar = ({ src, name }: AvatarProps) => {
         {name}
       </div>
 
-      {/* eslint-disable-next-line @next/next/no-img-element */}
       {src ? (
-        <img alt={name} src={src} className="size-full rounded-full" />
+        <Image alt={name} src={src} className="size-full rounded-full" width={AVATAR_SIZE} height={AVATAR_SIZE} />
       ) : (
-        <div className="size-full rounded-full bg-gray-300 flex items-center justify-center">
+        <div className="size-full rounded-full bg-gray-300 flex items-center justify-center text-white text-sm font-semibold">
           {name?.[0] || '?'}
         </div>
       )}
