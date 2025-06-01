@@ -39,9 +39,7 @@ export function ConvexClientProvider({ children }: PropsWithChildren) {
       }}
     >
       <ConvexProviderWithClerk useAuth={useAuth} client={convex}>
-        <Authenticated>
-          {children}
-        </Authenticated>
+        <Authenticated>{children}</Authenticated>
 
         <Unauthenticated>
           <div className="flex min-h-screen items-center justify-center">

@@ -1,6 +1,6 @@
+import { auth, currentUser } from '@clerk/nextjs/server';
 import { Liveblocks } from '@liveblocks/node';
 import { NextResponse } from 'next/server';
-import { auth, currentUser } from '@clerk/nextjs/server';
 
 const liveblocks = new Liveblocks({
   secret: process.env.LIVEBLOCKS_SECRET_KEY!,
